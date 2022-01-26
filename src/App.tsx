@@ -2,7 +2,6 @@ import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import Router from "./Router";
 import { dark, light } from "./theme";
 import DarkModeToggle from "react-dark-mode-toggle";
-import { useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isDarkAtom } from "./atom";
 

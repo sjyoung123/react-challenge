@@ -2,6 +2,8 @@ import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CoinsFetcher } from "../api";
+import Header from "../Components/Header";
+import Loading from "../Components/Loading";
 
 const Container = styled.div`
   padding: 0 20px;
@@ -9,12 +11,12 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
-const Header = styled.header``;
+// const Header = styled.header``;
 
-const Title = styled.h1`
-  text-align: center;
-  margin-bottom: 15px;
-`;
+// const Title = styled.h1`
+//   text-align: center;
+//   margin-bottom: 15px;
+// `;
 
 const CoinsList = styled.ul`
   max-width: 300px;
@@ -64,23 +66,23 @@ export default function Coins() {
   return (
     <>
       <Container>
-        <Header>
-          <Title>코인: 50</Title>
-        </Header>
+        <Header title="코인: 50" />
         <CoinsList>
-          {isLoading
-            ? "isLoading"
-            : data?.slice(0, 50).map((data) => (
-                <Link to={data.id}>
-                  <Coin key={data.id}>
-                    <span>{data.name}</span>
-                    <Img
-                      src={`https://cryptoicon-api.vercel.app/api/icon/${data.symbol.toLowerCase()}`}
-                      alt="coin-image"
-                    />
-                  </Coin>
-                </Link>
-              ))}
+          {isLoading ? (
+            <Loading />
+          ) : (
+            data?.slice(0, 50).map((data) => (
+              <Link key={data.id} to={data.id} state={{ name: data.name }}>
+                <Coin key={data.id}>
+                  <span>{data.name}</span>
+                  <Img
+                    src={`https://cryptoicon-api.vercel.app/api/icon/${data.symbol.toLowerCase()}`}
+                    alt="coin-image"
+                  />
+                </Coin>
+              </Link>
+            ))
+          )}
         </CoinsList>
       </Container>
     </>
