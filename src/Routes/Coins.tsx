@@ -11,13 +11,6 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
-// const Header = styled.header``;
-
-// const Title = styled.h1`
-//   text-align: center;
-//   margin-bottom: 15px;
-// `;
-
 const CoinsList = styled.ul`
   max-width: 300px;
   height: 80vh;
@@ -72,12 +65,16 @@ export default function Coins() {
             <Loading />
           ) : (
             data?.slice(0, 50).map((data) => (
-              <Link key={data.id} to={data.id} state={{ name: data.name }}>
+              <Link
+                key={data.id}
+                to={data.id}
+                state={{ name: data.name, symbol: data.symbol }}
+              >
                 <Coin key={data.id}>
                   <span>{data.name}</span>
                   <Img
-                    src={`https://cryptoicon-api.vercel.app/api/icon/${data.symbol.toLowerCase()}`}
-                    alt="coin-image"
+                    src={`https://cryptoicon-api.vercel.app/api/icon/${data.symbol?.toLowerCase()}`}
+                    alt="coin-icon"
                   />
                 </Coin>
               </Link>

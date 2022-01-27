@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import Header from "../Components/Header";
+import Overveiw from "../Components/Overview";
 
 const Container = styled.div`
   padding: 0 20px;
@@ -25,6 +26,7 @@ const Body = styled.div`
 interface ILocation {
   state: {
     name: string | null;
+    symbol: string | null;
   };
 }
 
@@ -39,8 +41,11 @@ export default function Coin() {
         <IconContainer>
           <FontAwesomeIcon onClick={() => navigate(-1)} icon={faHome} />
         </IconContainer>
-        <Header title={state?.name || "Loading..."} />
-        <Body></Body>
+        <Header
+          title={state?.name || "Loading..."}
+          src={`https://cryptoicon-api.vercel.app/api/icon/${state.symbol?.toLocaleLowerCase()}`}
+        />
+        <Overveiw />
       </Container>
     </>
   );
