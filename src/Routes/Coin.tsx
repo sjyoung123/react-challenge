@@ -1,9 +1,10 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
-import Header from "../Components/Header";
 import Overveiw from "../Components/Overview";
+
+import Tab from "../Components/Tab";
 
 const Container = styled.div`
   padding: 0 20px;
@@ -19,33 +20,19 @@ const IconContainer = styled.div`
     }
   }
 `;
-const Body = styled.div`
-  width: 100%;
-`;
-
-interface ILocation {
-  state: {
-    name: string | null;
-    symbol: string | null;
-  };
-}
 
 export default function Coin() {
   const { coinId } = useParams();
   const navigate = useNavigate();
-  const { state } = useLocation() as ILocation;
 
   return (
     <>
       <Container>
         <IconContainer>
-          <FontAwesomeIcon onClick={() => navigate(-1)} icon={faHome} />
+          <FontAwesomeIcon onClick={() => navigate("/")} icon={faHome} />
         </IconContainer>
-        <Header
-          title={state?.name || "Loading..."}
-          src={`https://cryptoicon-api.vercel.app/api/icon/${state.symbol?.toLocaleLowerCase()}`}
-        />
         <Overveiw />
+        <Tab coinId={coinId ? coinId : ""} />
       </Container>
     </>
   );

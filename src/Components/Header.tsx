@@ -20,7 +20,7 @@ const Image = styled.img`
 `;
 
 interface ITitle {
-  title: string;
+  title?: string | null;
   src?: string | null;
 }
 

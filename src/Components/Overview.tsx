@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { CoinInfoFetcher, CoinPriceFetcher } from "../api";
+import Header from "./Header";
 import Loading from "./Loading";
 
 const OverveiwContainer = styled.div`
@@ -90,18 +91,28 @@ interface Usd {
   percent_from_price_ath: number;
 }
 
+interface ILocation {
+  state: {
+    name: string;
+    symbol: string;
+  };
+}
+
 export default function Overveiw() {
   const { coinId } = useParams();
   const [startDate, setStartDate] = useState("");
+  const { state } = useLocation() as ILocation;
 
   const { isLoading: infoLoading, data: infoData } = useQuery<IInfo>(
     ["info", coinId],
-    () => CoinInfoFetcher(coinId)
+    () => CoinInfoFetcher(coinId),
+    { refetchInterval: 10000 }
   );
 
   const { isLoading: priceLoading, data: priceData } = useQuery<IPrice>(
     ["price", coinId],
-    () => CoinPriceFetcher(coinId)
+    () => CoinPriceFetcher(coinId),
+    { refetchInterval: 10000 }
   );
 
   const loading = infoLoading || priceLoading;
@@ -117,6 +128,16 @@ export default function Overveiw() {
 
   return (
     <>
+      <Header
+        title={
+          state?.name ? state.name : loading ? "Loading..." : infoData?.name
+        }
+        src={`https://cryptoicon-api.vercel.app/api/icon/${
+          state?.symbol
+            ? state.symbol.toLowerCase()
+            : infoData?.symbol.toLowerCase()
+        }`}
+      />
       <OverveiwContainer>
         {loading ? (
           <Loading />
