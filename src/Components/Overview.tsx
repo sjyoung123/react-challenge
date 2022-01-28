@@ -124,7 +124,7 @@ export default function Overveiw() {
         return date.toLocaleDateString();
       });
     }
-  });
+  }, [loading, infoData]);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { Link, Route, Routes, useMatch, useParams } from "react-router-dom";
+import { Link, Route, Routes, useMatch } from "react-router-dom";
 import styled from "styled-components";
 import Chart from "../Routes/Chart";
 import Price from "../Routes/Price";
