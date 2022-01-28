@@ -53,7 +53,7 @@ interface IInfo {
   last_data_at: Date;
 }
 
-interface IPrice {
+export interface IPrice {
   id: string;
   name: string;
   symbol: string;
@@ -67,11 +67,11 @@ interface IPrice {
   quotes: Quotes;
 }
 
-interface Quotes {
+export interface Quotes {
   USD: Usd;
 }
 
-interface Usd {
+export interface Usd {
   price: number;
   volume_24h: number;
   volume_24h_change_24h: number;

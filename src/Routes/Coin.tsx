@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Overveiw from "../Components/Overview";
 
 import Tab from "../Components/Tab";
+import { Helmet } from "react-helmet";
 
 const Container = styled.div`
   padding: 0 20px;
@@ -27,6 +28,9 @@ export default function Coin() {
 
   return (
     <>
+      <Helmet>
+        <title>{coinId}</title>
+      </Helmet>
       <Container>
         <IconContainer>
           <FontAwesomeIcon onClick={() => navigate("/")} icon={faHome} />

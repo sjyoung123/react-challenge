@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { CoinsFetcher } from "../api";
 import Header from "../Components/Header";
 import Loading from "../Components/Loading";
+import { Helmet } from "react-helmet";
 
 const Container = styled.div`
   padding: 0 20px;
@@ -58,6 +59,9 @@ export default function Coins() {
   const { isLoading, data } = useQuery<ICoins[]>("allCoins", CoinsFetcher);
   return (
     <>
+      <Helmet>
+        <title>Coins Application</title>
+      </Helmet>
       <Container>
         <Header title="코인: 50" />
         <CoinsList>

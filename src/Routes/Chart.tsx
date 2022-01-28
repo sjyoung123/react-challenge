@@ -20,7 +20,8 @@ interface IHistory {
 export default function Chart({ coinId }: ICoinId) {
   const { isLoading, data: chartData } = useQuery<IHistory[]>(
     ["ohlcv", coinId],
-    () => CoinChartFetcher(coinId)
+    () => CoinChartFetcher(coinId),
+    { refetchInterval: 10000 }
   );
   const isDark = useRecoilValue(isDarkAtom);
   return (
